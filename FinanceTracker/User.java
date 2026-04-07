@@ -27,11 +27,11 @@ public class User {
         return this.UID;
     }
 
-    public String getmail(){
+    public String geMail(){
         return this.mail;
     }
 
-    public String getname(){
+    public String getName(){
         return this.name;
     }
 
