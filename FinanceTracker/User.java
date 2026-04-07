@@ -14,8 +14,6 @@ public class User {
         this.mail=newMail;
     }
     
-    
-    
     //setters
     public void setMail(String newMail){
         this.mail=newMail;
