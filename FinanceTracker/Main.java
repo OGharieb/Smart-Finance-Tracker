@@ -7,22 +7,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // 1. BOOT SEQUENCE: Create User (Name, UID, Mail)
-        // Your User class requires these 3 specific arguments
         User myUser = new User("Alex", "EG-2026-X", "alex@cce.edu.eg");
         
-        // 2. SERVICES: Initialize Storage and the Wallet
+        
         FileHandling storage = new FileHandling(myUser);
         Wallet myWallet = new Wallet(myUser);
 
-        // 3. RESTORE: Load past data from the CSV file immediately
         List<Transaction> pastData = storage.loadedTransactions();
         for (Transaction t : pastData) {
             myWallet.addTransaction(t);
         }
 
         boolean isRunning = true;
-        System.out.println("--- Smart Finance Tracker v1.0 ---");
+        System.out.println("--- Smart Finance Tracker  ---");
         System.out.println("Welcome back, " + myUser.getName() + "!");
 
         while (isRunning) {
@@ -38,10 +35,10 @@ public class Main {
             System.out.print("Choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Clear the input buffer
+            scanner.nextLine(); 
 
             if (choice == 1 || choice == 2) {
-                // ADDING TRANSACTION
+                
                 System.out.print("Amount: ");
                 double amount = scanner.nextDouble();
                 scanner.nextLine();
@@ -51,11 +48,10 @@ public class Main {
 
                 boolean isIncome = (choice == 1);
                 
-                // Create object (sets date to .now() automatically)
+                
                 Transaction t = new Transaction(amount, category, isIncome);
                 myWallet.addTransaction(t);
                 
-                // Save to disk immediately using your 'saveTransactions' method
                 storage.saveTransactions(myWallet.getTransactions());
                 System.out.println("Done! File updated.");
 
@@ -71,7 +67,6 @@ public class Main {
                     for (int i = 0; i < history.size(); i++) {
                         Transaction t = history.get(i);
                         String type = t.isIncome() ? "INCOME " : "EXPENSE";
-                        // Using 'i' as the ID so you know which one to reverse later!
                         System.out.println(i + "  | " + t.getDate() + " | " + type + " | " + t.getCategory() + " | $" + t.getAmount());
                     }
                 }

@@ -15,6 +15,7 @@ public class Wallet {
         this.transactions.add(t);
         System.out.println("Transaction successfully added");
     }
+    
     public double checkBalance(){
         double balance=0.0;
         for(Transaction t: this.transactions){
