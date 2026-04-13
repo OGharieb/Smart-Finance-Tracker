@@ -13,8 +13,20 @@ public class Wallet {
 
     public void addTransaction(Transaction t){
         this.transactions.add(t);
-        System.out.println("Transaction successfully added");
     }
+    
+    public void revTransaction(Transaction t){
+        if(t.isReversed()){
+            System.out.println("Transaction already reversed.");
+            return;
+        }
+        Transaction reverse = new Transaction(t.getAmount(),"Reversal " + t.getCategory() , !t.isIncome(),true);
+        this.addTransaction(reverse);
+        t.setReverse();
+        
+    }
+
+    
     
     public double checkBalance(){
         double balance=0.0;

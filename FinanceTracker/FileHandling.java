@@ -19,15 +19,13 @@ public class FileHandling {
     }
 
     public void saveTransactions(List<Transaction> transactions){
-
         try(PrintWriter writer = new PrintWriter(new FileWriter(filename))){
             for(Transaction t : transactions){
                 if(t.isIncome())
-                    writer.println(t.getAmount()+","+t.getCategory()+",income,"+t.getDate());
+                    writer.println(t.getAmount()+","+t.getCategory()+",income,"+t.getDate()+","+t.isReversed());
                 else 
-                    writer.println(t.getAmount()+","+t.getCategory()+",expense,"+t.getDate());
+                    writer.println(t.getAmount()+","+t.getCategory()+",expense,"+t.getDate()+","+t.isReversed());
             }
-            System.out.println("Transaction history saved to "+filename);
         }catch(IOException e){
             System.out.println("Couldn't Save file " + e.getMessage());
         }
@@ -51,7 +49,8 @@ public class FileHandling {
                 if(data[2].equals("income"))
                     type=true;
                 LocalDate date = LocalDate.parse(data[3]);
-                Transaction t = new Transaction(amount, category, type,date);
+                boolean reverse = Boolean.parseBoolean(data[4]);
+                Transaction t = new Transaction(amount, category, type,date,reverse);
                 loadedList.add(t);
             }
 
